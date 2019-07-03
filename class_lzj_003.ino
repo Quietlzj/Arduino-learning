@@ -10,13 +10,17 @@ void dot()             //'*'
 void dash()            //'-'
 {
   digitalWrite(ledpin, HIGH);
-  delay(1000);
+  delay(750);
   digitalWrite(ledpin, LOW);
   delay(250);
 }
-void space()           //间隔
+void c_space()           //char间隔
 {
-  delay(3000);
+  delay(750);
+}
+void w_space()
+{
+  delay(1750);
 }
 char MORSE[][5] = {
   {'*', '-'},           //A
@@ -66,16 +70,17 @@ void loop()
       for (int i = 0;i < 5; i++)
       {
         sign = morse[i];
+        Serial.print(sign);
         if (sign == '*')
           dot();
         else if (sign == '-')
           dash();
-        Serial.print(sign);
+        else
+          c_space();
       }
-      //Serial.print(morse);
     }
-    else
-    Serial.println();
-    space();
+    else if (comechar == ' ' - 97)
+    Serial.print("/ ");
+    w_space();
   }
 }
